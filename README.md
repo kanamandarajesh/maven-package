@@ -75,3 +75,35 @@ If the file permissions are an issue (for example, with Docker or JAR files), yo
 
 sudo chmod -R 755 /var/lib/jenkins/workspace/project-1/Dockerfile
 This grants read, write, and execute permissions for the owner (Jenkins) and read and execute permissions for others.
+
+## set up the docker credentials 
+1. Creating Docker Credentials in Jenkins
+If you haven’t already created the Docker credentials, follow these steps:
+
+Step-by-Step to Create Docker Credentials
+Access Jenkins:
+
+Log in to your Jenkins dashboard.
+Navigate to Manage Jenkins:
+
+Click on Manage Jenkins from the left-hand menu.
+Go to Manage Credentials:
+
+Click on Manage Credentials.
+Choose the Credential Domain:
+
+Click on (global) (or select another domain if needed).
+Add Credentials:
+
+Click on Add Credentials on the left side.
+Fill in the Details:
+
+Kind: Select Username with password.
+Scope: Set it to Global.
+Username: Enter your Docker registry username (e.g., your Docker Hub username).
+Password: Enter your Docker registry password.
+ID: Assign a unique identifier for the credentials, such as dockerhub-creds.
+Description: (Optional) Add a brief description for clarity.
+Save:
+
+Click the OK button to save your credentials.
