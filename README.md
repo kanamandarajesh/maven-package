@@ -5,10 +5,17 @@ Ensure Java 17 is installed on the Jenkins server. You've confirmed Java 17 is a
 
 ## 2. Set up Java 17 in Jenkins
 
-Global Tool Configuration:
+Tool Configuration:
 In Jenkins, go to Manage Jenkins >  Tool Configuration.
 Scroll down to the JDK section.
 Add a new JDK, name it (e.g., Java 17), and set the installation path where Java 17 is installed. select install automatically > select from Install from adoptium.net and select the versrion.
+
+## 3. set up Maven 3.6.3
+in jenkins tool configurarion 
+in jenkins , go to manage jenkins > Tool Configuration
+Scroll down to the Maven section.
+Add a new MAVEN, name it (e.g., Maven 3.6.3), select install automatically > select from Install from apache and select the versrion.
+
 
 -----------------------------------------
 Since your JAR file is created in `/var/lib/jenkins/workspace/project-1/target`, you should create the `Dockerfile` in the root directory of your Jenkins project workspace, which is `/var/lib/jenkins/workspace/project-1/`.
