@@ -4,10 +4,12 @@ To run Maven with Java 17 on your Jenkins server, you need to ensure that Jenkin
 Ensure Java 17 is installed on the Jenkins server. You've confirmed Java 17 is already installed.
 
 ## 2. Set up Java 17 in Jenkins
+
 Global Tool Configuration:
 In Jenkins, go to Manage Jenkins >  Tool Configuration.
 Scroll down to the JDK section.
 Add a new JDK, name it (e.g., Java 17), and set the installation path where Java 17 is installed. select install automatically > select from Install from adoptium.net and select the versrion.
+
 -----------------------------------------
 Since your JAR file is created in `/var/lib/jenkins/workspace/project-1/target`, you should create the `Dockerfile` in the root directory of your Jenkins project workspace, which is `/var/lib/jenkins/workspace/project-1/`.
 
