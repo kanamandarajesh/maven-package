@@ -56,3 +56,15 @@ docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} .
 ``` 
 
 This setup should now work, and Jenkins will create the Docker image using your `Dockerfile` and the JAR file generated in the `target` folder.
+
+## 1. Grant Jenkins User Access to Files and Directories
+If the Jenkins user doesn't have access to certain directories or files, you can modify permissions using chown or chmod.
+For example, if you need to grant Jenkins access to the /var/lib/jenkins/workspace/project-1 directory:
+
+sudo chown -R jenkins:jenkins /var/lib/jenkins/workspace/project-1/Dockerfile
+This command makes the Jenkins user the owner of the directory.
+
+If the file permissions are an issue (for example, with Docker or JAR files), you can also adjust them:
+
+sudo chmod -R 755 /var/lib/jenkins/workspace/project-1/Dockerfile
+This grants read, write, and execute permissions for the owner (Jenkins) and read and execute permissions for others.
