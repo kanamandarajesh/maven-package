@@ -3,8 +3,9 @@ pipeline
     agent any
     environment
     {
-       DOCKER_IMAGE_NAME = 'my-app'
+       DOCKER_IMAGE_NAME = 'dockerspacex/my-app'
        DOCKER_IMAGE_TAG = 'latest'
+       //DOCKER_REGISTRY = 'dockerspacex'
     }
     tools
     {
@@ -38,6 +39,34 @@ pipeline
                     '''
                 }
                       
+            }
+        }
+        stage('Login to Docker Registry')
+        {
+            steps
+            {
+                script
+                {
+                    withCredentials([usernamePassword(credentialsId: '3a2a5540-c9f8-46cf-af31-b69252f84a65', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) 
+                    {  
+                       sh '''
+                       echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                       '''
+                    }   
+                }
+            }
+        }
+        stage('Push Image to Docker Hub')
+        {
+            steps
+            {
+                script
+                {
+                    sh '''
+                    docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
+                    '''
+                    echo "Image pushed to Docker Hub"
+                }
             }
         }
     }
