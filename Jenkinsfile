@@ -1,3 +1,4 @@
+
 pipeline
 {
     agent any
@@ -6,6 +7,9 @@ pipeline
        DOCKER_IMAGE_NAME = 'dockerspacex/my-app'
        DOCKER_IMAGE_TAG = 'latest'
        //DOCKER_REGISTRY = 'dockerspacex'
+       REMOTE_USER = 'root'  // Adjust this to your remote user
+       REMOTE_HOST = '192.168.199.129'
+       SSH_KEY_ID = 'my-ssh-key' // This is the ID you set for your SSH credentials       
     }
     tools
     {
@@ -66,6 +70,18 @@ pipeline
                     docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
                     '''
                     echo "Image pushed to Docker Hub"
+                }
+            }
+        }
+        stage('Deployment')
+        {
+            steps
+            {
+                script
+                {
+                    sh '''
+                    ssh -i ${SSH_KEY_ID} -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "kubectl apply -f /root/Kubernetes/pod.yml"
+                    '''
                 }
             }
         }
